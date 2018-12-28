@@ -30,7 +30,7 @@ services:
       - redis
     labels:
       traefik.docker.network: "web"
-      traefik.cozy_cloud.frontend.rule: Host:cozy.tams.tech,onboarding.cozy.tams.tech,settings.cozy.tams.tech,drive.cozy.tams.tech,photos.cozy.tams.tech,home.cozy.tams.tech,store.cozy.tams.tech
+      traefik.cozy_cloud.frontend.rule: Host:cozy.tams.tech,onboarding.cozy.tams.tech,settings.cozy.tams.tech,drive.cozy.tams.tech,photos.cozy.tams.tech,home.cozy.tams.tech,store.cozy.tams.tech,collect.cozy.tams.tech
       traefik.cozy_cloud.port: 8080
       traefik.cozy_cloud.protocol: http
       traefik.enable: "true"
