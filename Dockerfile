@@ -15,7 +15,7 @@ RUN apk --no-cache add git imagemagick && \
 
 ADD config/cozy.yml /cozy/.cozy/
 
-EXPOSE 8080
+EXPOSE 8080, 6060
 USER cozy
 
 VOLUME /cozy/storage

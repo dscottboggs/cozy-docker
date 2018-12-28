@@ -1,0 +1,34 @@
+host: 0.0.0.0
+port: 8080
+
+subdomains: nested
+
+admin:
+  host: 0.0.0.0
+  port: 6060
+
+registries:
+- https://apps-registry.cozycloud.cc/
+
+fs:
+  url: file://localhost/cozy/storage
+
+couchdb:
+  url: http://couchdb:5984/
+
+redis:
+  addrs: redis:6379
+  databases:
+    jobs: 0
+    cache: 1
+    lock: 2
+    sessions: 3
+    downloads: 4
+    konnectors: 5
+    realtime: 6
+    log: 7
+
+log:
+  level: info
+  syslog: false
+

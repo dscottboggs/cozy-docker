@@ -3,7 +3,7 @@ services:
   couchdb:
     image: apache/couchdb:2.1
     volumes:
-      - couchdb-data:/opt/couchdb/data
+      - ./mounts/couchdb-data:/opt/couchdb/data
     networks:
       - intranet
 
@@ -13,26 +13,24 @@ services:
       - intranet
 
   cozy:
-    image: moritzheiber/cozy-stack
+    build: .
     links:
       - couchdb:couchdb
       - redis:redis
     ports:
       - "8080:8080"
     volumes:
-      - cozy-storage:/cozy/storage
+      - ./mounts/cozy-storage:/cozy/storage
+      - ./mounts/cozy-conf:/cozy/.cozy
     networks:
-      - docker_network
+      - web
       - intranet
     depends_on:
       - couchdb
       - redis
 
-volumes:
-  couchdb-data:
-  cozy-storage:
 networks:
-  docker_network:
-    driver: bridge
+  web:
+    external: true
   intranet:
     internal: true
