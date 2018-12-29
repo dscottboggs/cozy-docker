@@ -6,6 +6,7 @@ subdomains: nested
 admin:
   host: 0.0.0.0
   port: 6060
+  secret_filename: "hashed-cozy-admin-passphrase"
 
 registries:
 - https://apps-registry.cozycloud.cc/
@@ -31,4 +32,3 @@ redis:
 log:
   level: info
   syslog: false
-

@@ -35,7 +35,9 @@ A small(ish) image to run the latest version of the [Cozy cloud (v3)](https://co
    to your A-Records, pointed at your reverse proxy.
 
 2. Generate a new long random password using alphanumeric characters, and place
-   it in `mounts/cozy-conf/cozy-admin-passphrase`, right next to `cozy.yml`
+   it in `mounts/cozy-conf/cozy-admin-passphrase`, right next to `cozy.yml`.
+   Encrypt it with `passphrase=$(cat mounts/cozy-conf/cozy-admin-passphrase) go run scripts/encrypt_pw.go > mounts/cozy-conf/hashed-cozy-admin-passphrase`
+   from the project root (or an scrypt generator of your choice).
 
 3. Run `docker-compose up --build -d && docker-compose logs -f`. This will allow
    allow you to view the logs without stopping everything when you exit the logs
@@ -53,7 +55,7 @@ A small(ish) image to run the latest version of the [Cozy cloud (v3)](https://co
 5. The instance must now be registered. The previous command output a
    registration token. Navigate in your web browser to the following URL,
    substituting your domain and registration key at the appropriate locations:
-     `https://<example.com>/?registerToken=<yourToken>`
+     `https://<example.com>/?registerToken=<your token>`
    This will redirect you to a page where you will choose a password, and then
    you will be able to access your Cozy stack instance.
 
