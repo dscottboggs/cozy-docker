@@ -34,10 +34,14 @@ A small(ish) image to run the latest version of the [Cozy cloud (v3)](https://co
    For DNS, it's just a matter of adding *example.com* and *\*.example.com* to
    to your A-Records, pointed at your reverse proxy.
 
-2. Generate a new long random password using alphanumeric characters, and place
-   it in `mounts/cozy-conf/cozy-admin-passphrase`, right next to `cozy.yml`.
-   Encrypt it with `passphrase=$(cat mounts/cozy-conf/cozy-admin-passphrase) go run scripts/encrypt_pw.go > mounts/cozy-conf/hashed-cozy-admin-passphrase`
-   from the project root (or an scrypt generator of your choice).
+2. Generate a new long random password using alphanumeric characters, and store
+   it somewhere safe, like in the project root and named `cozy-admin-passphrase`
+   (which is in the `.gitignore` file), right next to `cozy.yml`. Encrypt it with
+   ```sh
+   passphrase=$(cat cozy-admin-passphrase) go run scripts/encrypt_pw.go
+   ```
+   from the project root (or an scrypt generator of your choice), and place it
+   at (or redirect the command output to) `mounts/cozy-conf/hashed-cozy-admin-passphrase`.
 
 3. Run `docker-compose up --build -d && docker-compose logs -f`. This will allow
    allow you to view the logs without stopping everything when you exit the logs
