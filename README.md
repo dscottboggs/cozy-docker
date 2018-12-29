@@ -50,13 +50,26 @@ A small(ish) image to run the latest version of the [Cozy cloud (v3)](https://co
    (youll start seeing its log entries), press ctrl+C to exit the logview and
    run `docker-compose up -d` again. Your Cozy stack should be running now.
 
-4. Create an instance: run `docker-compose exec cozy sh`. This will create an
-   interactive shell on the running Cozy instance. Use `cozy-stack instances add --apps collect,contacts,drive,home,photos,settings,store --email <your email> example.com`
-   to create a Cozy instance. It's important to bear in mind here that Cozy
-   instances are per-user: Each user requires their own subdomain and each
-   instance will need to be created separately with this command.
+4. Create an instance: run the following command to create a Cozy instance
+    ```sh
+    docker-compose exec -e "COZY_ADMIN_PASSWORD=`cat cozy-admin-passphrase`" cozy \
+      cozy-stack instances add \
+        --apps collect,contacts,drive,home,photos,settings,store,onboarding \
+        --email <your email> example.com
+    ```
+   It's important to bear in mind here that Cozy instances are per-user: Each
+   user requires their own subdomain and each instance will need to be created
+   separately with this command.
 
-5. The instance must now be registered. The previous command output a
+5. Install the *onboarding* app with the following command:
+    ```sh
+    docker-compose exec -e "COZY_ADMIN_PASSWORD=`cat cozy-admin-passphrase`" cozy \
+      cozy-stack apps install \
+        --domain <example.com> \
+        onboarding git://github.com/cozy/cozy-onboarding-v3.git#latest
+    ```
+
+6. The instance must now be registered. The previous command output a
    registration token. Navigate in your web browser to the following URL,
    substituting your domain and registration key at the appropriate locations:
      `https://<example.com>/?registerToken=<your token>`
